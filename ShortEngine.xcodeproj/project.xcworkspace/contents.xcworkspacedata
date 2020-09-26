@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:ShortEngine.xcodeproj">
+      location = "group:/Volumes/Samsung_T5/Developer/Xcode-Workspace/ShortEngine/ShortEngine/Assets/attack 2.png">
+   </FileRef>
+   <FileRef
+      location = "self:">
    </FileRef>
 </Workspace>

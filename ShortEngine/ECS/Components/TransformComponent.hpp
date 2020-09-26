@@ -9,8 +9,6 @@
 #ifndef TransformComponent_hpp
 #define TransformComponent_hpp
 
-#include "Component.hpp"
-
 #include <iostream>
 
 struct TransformComponent
@@ -28,6 +26,7 @@ struct TransformComponent
         rotation = r;
     };
         
+    ~TransformComponent() { std::cout << "TransformComponent Destructor Called" << std::endl; };
     TransformComponent(TransformComponent const& source) = default;
     TransformComponent(TransformComponent&& source) = default;
     

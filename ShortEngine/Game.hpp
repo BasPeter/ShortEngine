@@ -11,11 +11,17 @@
 
 #include <stdio.h>
 #include <SDL2/SDL.h>
+#include <SDL2_image/SDL_image.h>
 #include <string>
 #include <iostream>
 
+#include "ComponentManager.hpp"
 #include "EntityManager.hpp"
-#include "TransformComponent.hpp"
+#include "AssetManager.hpp"
+#include "Components.hpp"
+
+class AssetManager;
+class EntityManager;
 
 class Game
 { 
@@ -37,6 +43,7 @@ public:
     static SDL_Renderer *Renderer;
     static SDL_Event *Events;
     static EntityManager *Registry;
+    static AssetManager *Assets;
     
 private:
     bool _running;

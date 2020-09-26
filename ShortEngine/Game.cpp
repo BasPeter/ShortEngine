@@ -11,6 +11,7 @@
 SDL_Renderer *Game::Renderer = NULL;
 SDL_Event *Game::Events;
 EntityManager *Game::Registry = nullptr;
+AssetManager *Game::Assets = nullptr;
 
 Game::Game()
 {
@@ -48,15 +49,32 @@ void Game::init(const std::string title, int width, int height, bool fullscreen)
           std::cout << "SDL Error: " << SDL_GetError() << std::endl;
       }
     
+    // Create AssetManager
+    Assets = AssetManager::Create();
+    Assets->RegisterTexture("character_run", "Assets/Character_Run.png");
+    Assets->RegisterTexture("character_attack", "Assets/Character_Attack.png");
+
+    
+    // Init PNG loading
+    int imgFlags = IMG_INIT_PNG;
+    if( !( IMG_Init( imgFlags ) & imgFlags ) )
+    {
+        printf( "SDL_image could not initialize! SDL_image Error: %s\n", IMG_GetError() );
+    }
+    
     Registry = EntityManager::CreateRegistry();
     
-        
-    for (float i = 1; i <= 300; i++)
-        for (float ii = 1; ii <= 200; ii++) {
-            {
-                Registry->Emplace<TransformComponent>(Registry->Create(), 5.0f * i, 5.0f * ii, 2.0f, 2.0f, 0.0f);
-            }
-    }
+    Entity* E1 = Registry->Create();
+    Entity* E2 = Registry->Create();
+            
+    Registry->Emplace<SpriteComponent>(E1, "character_run", 6, 137, 264, 137, 44);
+    Registry->Emplace<TransformComponent>(E1, 100.0f, 100.0f, 2.0f, 2.0f, 0.0f);
+    Registry->Emplace<AnimateComponent>(E1, 0, 1000/6, true);
+    
+    Registry->Emplace<SpriteComponent>(E2, "character_attack", 13, 137, 572, 137, 44);
+    Registry->Emplace<TransformComponent>(E2, 300.0f, 100.0f, 2.0f, 2.0f, 0.0f);
+    Registry->Emplace<AnimateComponent>(E2, 0, 1000/12, true);
+
     _running = true;
 }
 
@@ -71,19 +89,42 @@ void Game::Render()
     SDL_RenderClear(Renderer);
     
     SDL_SetRenderDrawColor(Renderer, 0xFF, 0xCC, 0x00, 0xFF);
-
-    auto manager = dynamic_cast<ComponentManager<TransformComponent>*>(Registry->GetComponentManager<TransformComponent>());
-    auto& view = manager->GetView();
+        
+//    SDL_RenderCopy(Renderer, Assets->GetTexture("character_run"), NULL, NULL);
     
-    for (auto& component : view)
-    {
-        SDL_RenderDrawPoint(Renderer, component.position[0], component.position[1]);
+    auto manager = dynamic_cast<ComponentManager<SpriteComponent>*>(Registry->GetComponentManager<SpriteComponent>());
+    
+    SDL_Rect sheet;
+    auto group = manager->Group<TransformComponent>();
+    for (auto& [sprite, transform] : group) {
+        sheet.x = transform->position[0];
+        sheet.y = transform->position[1];
+        sheet.w = sprite->frame.w * transform->scale[0];
+        sheet.h = sprite->frame.h * transform->scale[1];
+
+        SDL_RenderCopy(Renderer, Assets->GetTexture(sprite->name), &(sprite->frame), &sheet);
     }
     SDL_RenderPresent(Renderer);
 }
 
 void Game::Update()
 {
+    auto manager = dynamic_cast<ComponentManager<SpriteComponent>*>(Registry->GetComponentManager<SpriteComponent>());
+    auto group = manager->Group<AnimateComponent>();
+    
+    for (auto& [sprite, animate] : group)
+    {
+        if (animate->animate && SDL_GetTicks() - animate->last_frame > animate->speed)
+        {
+            sprite->frame.y += sprite->frame.h;
+            animate->current_frame += 1;
+            if (animate->current_frame >= sprite->frames) {
+                animate->current_frame = 0;
+                sprite->frame.y = 0;
+            }
+            animate->last_frame = SDL_GetTicks();
+        };
+    }
 }
 
 void Game::Clean()

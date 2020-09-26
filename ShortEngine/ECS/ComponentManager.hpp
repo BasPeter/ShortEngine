@@ -12,9 +12,12 @@
 #include <stdio.h>
 #include <unordered_map>
 #include <vector>
+#include <set>
+#include <algorithm>
 
+#include "Game.hpp"
 #include "EntityManager.hpp"
-#include "TransformComponent.hpp"
+#include "Components.hpp"
 
 // Forward declaration Entity
 struct Entity;
@@ -32,14 +35,18 @@ public:
     ~ComponentManager();
     
     template <typename... Args>
-    void Emplace(Entity& entity, Args... args);
-    void Remove(Entity entity);
+    void Emplace(Entity* entity, Args... args);
+    void Remove(Entity* entity);
     
+    T* GetComponent(unsigned id);
     std::vector<T>& GetView() { return _components; };
+    
+    template <typename G>
+    std::vector<std::pair<T*, G*>> Group();
     
 private:
     std::unordered_map<unsigned, unsigned> _map;
-    std::vector<T> _components{};
+    std::vector<T*> _components{};
     
     unsigned int idx;
 };
