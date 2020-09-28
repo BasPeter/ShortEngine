@@ -51,7 +51,7 @@ void ComponentManager<T>::Remove(Entity* entity) {
 
 // Explicit instatiation
 template void ComponentManager<TransformComponent>::Emplace(Entity* entity, float x, float y, float w, float h, float r);
-template void ComponentManager<SpriteComponent>::Emplace(Entity* entity, int, int, std::vector<SpriteSheet*>);
+template void ComponentManager<SpriteComponent>::Emplace(Entity* entity, SpriteSheet*);
 template void ComponentManager<AnimateComponent>::Emplace(Entity* entity, int, int, bool);
 
 
@@ -88,5 +88,6 @@ std::vector<std::pair<T*, G*>> ComponentManager<T>::Group()
     return grouped_components;
 }
 
+// Explicit instatiation
 template std::vector<std::pair<SpriteComponent*, TransformComponent*>> ComponentManager<SpriteComponent>::Group<TransformComponent>();
 template std::vector<std::pair<SpriteComponent*, AnimateComponent*>> ComponentManager<SpriteComponent>::Group<AnimateComponent>();

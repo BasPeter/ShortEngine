@@ -18,7 +18,6 @@
 
 #include "ComponentManager.hpp"
 #include "SpriteSheetManager.hpp"
-#include "SpriteSheet.hpp"
 #include "Entity.hpp"
 #include "Components.hpp"
 

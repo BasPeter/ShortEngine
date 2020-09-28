@@ -8,9 +8,9 @@
 
 #include "SpriteSheet.hpp"
 
-SpriteSheet::SpriteSheet(std::string sheet_name, int frames, int sheet_width, int sheet_height, int columns, int rows)
+SpriteSheet::SpriteSheet(SDL_Texture* texture, int frames, int sheet_width, int sheet_height, int columns, int rows)
 {
-    texture = Game::Assets->GetTexture(sheet_name);
+    this->texture = texture;
         
     sheet_size[0] = sheet_width;
     sheet_size[1] = sheet_height;
@@ -20,7 +20,12 @@ SpriteSheet::SpriteSheet(std::string sheet_name, int frames, int sheet_width, in
     _rows = rows;
 }
 
-SDL_Rect GetFrame(int frame)
+SDL_Rect SpriteSheet::GetFrame(int frame)
 {
-    return SDL_Rect{0,0,0,0};
+    // Find SDL_Rect defining given frame
+    return SDL_Rect{
+        (frame % _rows) * (sheet_size[0] / _rows),
+        (frame % _columns) * (sheet_size[1] / _columns),
+        sheet_size[0]/_rows,
+        sheet_size[1]/_columns};
 }

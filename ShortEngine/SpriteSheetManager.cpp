@@ -23,9 +23,10 @@ void SpriteSheetManager::DeleteSpriteSheet() {
 void SpriteSheetManager::RegisterSpriteSheet(std::string name, std::string sheet_name, std::string path, int frames, int sheet_width, int sheet_height, int columns, int rows) {
     // Register texture on AssetManager;
     Game::Assets->RegisterTexture(sheet_name, path.c_str());
+    SDL_Texture* texture = Game::Assets->GetTexture(sheet_name);
     
     // Add SpriteSheet to map with corresponding key
-    SpriteSheet* sprite_sheet_ptr = new SpriteSheet(sheet_name, frames, sheet_width, sheet_height, columns, rows);
+    SpriteSheet* sprite_sheet_ptr = new SpriteSheet(texture, frames, sheet_width, sheet_height, columns, rows);
     _sprite_sheets.emplace(name, sprite_sheet_ptr);
 }
 

@@ -14,20 +14,17 @@
 #include <SDL2/SDL.h>
 #include <SDL2_image/SDL_image.h>
 
-#include "Game.hpp"
-
 class SpriteSheet
 {
 public:
     SDL_Texture* texture;
     int sheet_size[2];
         
-    SpriteSheet(std::string sheet_name, int frames, int sheet_width, int sheet_height, int columns, int rows);
+    SpriteSheet(SDL_Texture* texture, int frames, int sheet_width, int sheet_height, int columns, int rows);
     
     SDL_Rect GetFrame(int frame);
-    
-    int _sheet_size[2];
-    
+    int GetFrames() { return _frames; };
+        
 private:
     int _frames;
     int _columns;

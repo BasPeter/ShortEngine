@@ -14,15 +14,14 @@
 
 struct AnimateComponent
 {
-    unsigned int current_frame{0};
+//    unsigned int current_frame{0};
     unsigned int speed{0};
     Uint32 last_frame{0};
     bool animate{false};
     
-    AnimateComponent(int c_f, int s, bool a)
+    AnimateComponent(int c_f, int fps, bool a)
     {
-        current_frame = c_f;
-        speed = s;
+        speed = 1000/fps;
         animate = a;
     }
     

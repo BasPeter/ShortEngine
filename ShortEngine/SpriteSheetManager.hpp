@@ -14,6 +14,7 @@
 #include <map>
 #include <array>
 
+#include "Game.hpp"
 #include "SpriteSheet.hpp"
 
 class SpriteSheet;
