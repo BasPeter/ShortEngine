@@ -29,7 +29,6 @@ int main(int argc, const char * argv[]) {
         game.Update();
         game.Render();
         
-        
         int frameEnd = SDL_GetTicks();
         int duration = frameEnd - frameStart;
         

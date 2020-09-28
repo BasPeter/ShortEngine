@@ -51,7 +51,7 @@ void ComponentManager<T>::Remove(Entity* entity) {
 
 // Explicit instatiation
 template void ComponentManager<TransformComponent>::Emplace(Entity* entity, float x, float y, float w, float h, float r);
-template void ComponentManager<SpriteComponent>::Emplace(Entity* entity, const char*, int, int, int, int, int);
+template void ComponentManager<SpriteComponent>::Emplace(Entity* entity, int, int, std::vector<SpriteSheet*>);
 template void ComponentManager<AnimateComponent>::Emplace(Entity* entity, int, int, bool);
 
 

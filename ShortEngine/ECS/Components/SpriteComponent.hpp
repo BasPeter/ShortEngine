@@ -10,33 +10,24 @@
 #define SpriteComponent_hpp
 
 #include <SDL2/SDL.h>
+#include <SDL2_image/SDL_image.h>
+#include <set>
+#include <map>
 
-struct SpriteComponent
+#include "Game.hpp"
+#include "AssetManager.hpp"
+#include "SpriteSheet.hpp"
+
+class SpriteComponent
 {
+public:
     const char* name{""};
-    unsigned int frames{0};
-    
-    unsigned int sheet_size[2];
-    unsigned int frame_size[2];
-    
-    SDL_Rect frame;
-
-    
-    SpriteComponent(const char* n, unsigned int f, unsigned int s_w, unsigned int s_h, unsigned int f_w, unsigned int f_h)
+    SpriteSheet* sprite_sheet;
+        
+//    SpriteComponent(const char* n, unsigned int f, unsigned int s_w, unsigned int s_h, unsigned int f_w, unsigned int f_h)
+    SpriteComponent(unsigned int f_w, unsigned int f_h, std::vector<SpriteSheet*> sheets)
     {
-        name = n;
-        frames = f;
-        
-        sheet_size[0] = s_w;
-        sheet_size[1] = s_h;
-        
-        frame.x = 0;
-        frame.y = 0;
-        frame.w = f_w;
-        frame.h = f_h;
-        
-        frame_size[0] = f_w;
-        frame_size[1] = f_h;
+//        sprite_sheets = sheets;
     }
     
     ~SpriteComponent()
@@ -44,8 +35,12 @@ struct SpriteComponent
         std::cout << "Sprite Component Destructor Called" << std::endl;
     }
     
-    SpriteComponent(SpriteComponent const& source) = default;
-    SpriteComponent(SpriteComponent&& source) = default;
+    void draw(float position[2], float scale[2], SDL_Rect frame)
+    {
+        
+    }
+    
+private:
 };
 
 #endif /* SpriteComponent_hpp */

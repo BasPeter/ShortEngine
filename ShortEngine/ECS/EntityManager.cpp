@@ -47,7 +47,7 @@ void EntityManager::Emplace(Entity* entity, Args... args)
 
 // Explicit instatiation
 template void EntityManager::Emplace<TransformComponent>(Entity* entity, float x, float y, float w, float h, float r);
-template void EntityManager::Emplace<SpriteComponent>(Entity* entity, const char*, int, int, int, int, int);
+template void EntityManager::Emplace<SpriteComponent>(Entity* entity, int, int, std::vector<SpriteSheet*>);
 template void EntityManager::Emplace<AnimateComponent>(Entity* entity, int, int, bool);
 
 
@@ -57,9 +57,7 @@ ComponentManagerInstance* EntityManager::GetComponentManager()
     auto manager = _managers[typeid(T).name()];
     if (manager == nullptr)
     {
-//        auto newManager = new ComponentManager<T>();
         manager = std::make_shared<ComponentManager<T>>();
-//        manager = newptr;
         _managers[typeid(T).name()] = manager;
     }
     

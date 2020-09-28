@@ -18,9 +18,11 @@
 #include "ComponentManager.hpp"
 #include "EntityManager.hpp"
 #include "AssetManager.hpp"
+#include "SpriteSheetManager.hpp"
 #include "Components.hpp"
 
 class AssetManager;
+class SpriteSheetManager;
 class EntityManager;
 
 class Game
@@ -44,6 +46,7 @@ public:
     static SDL_Event *Events;
     static EntityManager *Registry;
     static AssetManager *Assets;
+    static SpriteSheetManager *SpriteSheets;
     
 private:
     bool _running;

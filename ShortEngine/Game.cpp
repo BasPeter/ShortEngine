@@ -12,6 +12,7 @@ SDL_Renderer *Game::Renderer = NULL;
 SDL_Event *Game::Events;
 EntityManager *Game::Registry = nullptr;
 AssetManager *Game::Assets = nullptr;
+SpriteSheetManager *Game::SpriteSheets = nullptr;
 
 Game::Game()
 {
@@ -51,8 +52,13 @@ void Game::init(const std::string title, int width, int height, bool fullscreen)
     
     // Create AssetManager
     Assets = AssetManager::Create();
-    Assets->RegisterTexture("character_run", "Assets/Character_Run.png");
-    Assets->RegisterTexture("character_attack", "Assets/Character_Attack.png");
+    SpriteSheets = SpriteSheetManager::Create();
+//    Assets->RegisterTexture("character_run", "Assets/Character_Run.png");
+//    Assets->RegisterTexture("character_attack", "Assets/Character_Attack.png");
+    SpriteSheets->RegisterSpriteSheet("walk", "character_walk", "Assets/Character_Run.png", 6, 137, 264, 6, 1);
+    SpriteSheets->RegisterSpriteSheet("attack", "character_attack", "Assets/Character_Attack.png", 13, 137, 572, 6, 1);
+
+    auto sheets = SpriteSheets->GetSpriteSheets("walk", "attack");
 
     
     // Init PNG loading
@@ -65,15 +71,27 @@ void Game::init(const std::string title, int width, int height, bool fullscreen)
     Registry = EntityManager::CreateRegistry();
     
     Entity* E1 = Registry->Create();
-    Entity* E2 = Registry->Create();
-            
-    Registry->Emplace<SpriteComponent>(E1, "character_run", 6, 137, 264, 137, 44);
-    Registry->Emplace<TransformComponent>(E1, 100.0f, 100.0f, 2.0f, 2.0f, 0.0f);
-    Registry->Emplace<AnimateComponent>(E1, 0, 1000/6, true);
+//    Entity* E2 = Registry->Create();
+//    Entity* E3 = Registry->Create();
+//    std::vector<std::string> sheet_names();
+//    std::vector<SpriteSheet*> sprite_sheets = SpriteSheets->GetSpriteSheets(sheet_names);
+//    sprite_sheets.push_back("walk", "character_run", 6, 137, 264);
+//    sprite_sheets.emplace_back("attack", "character_attack", 6, 137, 572);
     
-    Registry->Emplace<SpriteComponent>(E2, "character_attack", 13, 137, 572, 137, 44);
-    Registry->Emplace<TransformComponent>(E2, 300.0f, 100.0f, 2.0f, 2.0f, 0.0f);
-    Registry->Emplace<AnimateComponent>(E2, 0, 1000/12, true);
+//    Registry->Emplace<SpriteComponent>(E1, 137, 44, sprite_sheets);
+//    dynamic_cast<ComponentManager<SpriteComponent>*>(Registry->GetComponentManager<TransformComponent>())
+//    ->GetComponent(E1->getId())->AddSpriteSheet("walk", "character_walk", 6);
+
+//    Registry->Emplace<TransformComponent>(E1, 100.0f, 100.0f, 4.0f, 4.0f, 0.0f);
+//    Registry->Emplace<AnimateComponent>(E1, 0, 1000/12, true);
+    
+//    Registry->Emplace<SpriteComponent>(E2, 137, 572, 137, 44);
+//    Registry->Emplace<TransformComponent>(E2, 200.0f, 100.0f, 4.5f, 4.5f, 0.0f);
+//    Registry->Emplace<AnimateComponent>(E2, 0, 1000/12, true);
+//
+//    Registry->Emplace<SpriteComponent>(E3, 137, 572, 137, 44);
+//    Registry->Emplace<TransformComponent>(E3, 400.0f, 100.0f, 2.0f, 2.0f, 0.0f);
+//    Registry->Emplace<AnimateComponent>(E3, 0, 1000/24, true);
 
     _running = true;
 }
@@ -97,12 +115,15 @@ void Game::Render()
     SDL_Rect sheet;
     auto group = manager->Group<TransformComponent>();
     for (auto& [sprite, transform] : group) {
+        /*
         sheet.x = transform->position[0];
         sheet.y = transform->position[1];
         sheet.w = sprite->frame.w * transform->scale[0];
         sheet.h = sprite->frame.h * transform->scale[1];
 
         SDL_RenderCopy(Renderer, Assets->GetTexture(sprite->name), &(sprite->frame), &sheet);
+         */
+        sprite->draw(transform->position);
     }
     SDL_RenderPresent(Renderer);
 }
@@ -116,13 +137,13 @@ void Game::Update()
     {
         if (animate->animate && SDL_GetTicks() - animate->last_frame > animate->speed)
         {
-            sprite->frame.y += sprite->frame.h;
-            animate->current_frame += 1;
-            if (animate->current_frame >= sprite->frames) {
-                animate->current_frame = 0;
-                sprite->frame.y = 0;
-            }
-            animate->last_frame = SDL_GetTicks();
+//            sprite->frame.y += sprite->frame.h;
+//            animate->current_frame += 1;
+//            if (animate->current_frame >= sprite->frames) {
+//                animate->current_frame = 0;
+//                sprite->frame.y = 0;
+//            }
+//            animate->last_frame = SDL_GetTicks();
         };
     }
 }

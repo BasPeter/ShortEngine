@@ -10,7 +10,9 @@
 		5A1C06A4251F7517009867C1 /* AssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A1C06A2251F7517009867C1 /* AssetManager.cpp */; };
 		5A1C06A6251F7608009867C1 /* SDL2_image.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A1C06A5251F7608009867C1 /* SDL2_image.framework */; };
 		5A1C06AE251F7998009867C1 /* Character_Run.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5A1C06AD251F7986009867C1 /* Character_Run.png */; };
+		5A2BA5262520E15500D7CEAC /* SpriteSheet.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A2BA5242520E15500D7CEAC /* SpriteSheet.cpp */; };
 		5A3D4510251DE2E7002F3761 /* ComponentManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A3D450E251DE2E7002F3761 /* ComponentManager.cpp */; };
+		5A466E1D25212CD200207A6F /* SpriteSheetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A466E1B25212CD200207A6F /* SpriteSheetManager.cpp */; };
 		5A6CB52E251FE3C1001F11E5 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A6CB52C251FE3C1001F11E5 /* Entity.cpp */; };
 		5A6CB534251FF2CD001F11E5 /* Character_Attack.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5A6CB533251FF2B9001F11E5 /* Character_Attack.png */; };
 		5A7F54AC251CE4DA00A55B3E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A7F54AB251CE4DA00A55B3E /* main.cpp */; };
@@ -41,9 +43,14 @@
 		5A1C06AD251F7986009867C1 /* Character_Run.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Character_Run.png; sourceTree = "<group>"; };
 		5A1C06B0251F8203009867C1 /* AnimateComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AnimateComponent.hpp; sourceTree = "<group>"; };
 		5A1C06B3251F8436009867C1 /* Components.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Components.hpp; sourceTree = "<group>"; };
+		5A2BA51F2520D0E200D7CEAC /* PlayerControlComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PlayerControlComponent.hpp; sourceTree = "<group>"; };
+		5A2BA5242520E15500D7CEAC /* SpriteSheet.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SpriteSheet.cpp; sourceTree = "<group>"; };
+		5A2BA5252520E15500D7CEAC /* SpriteSheet.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SpriteSheet.hpp; sourceTree = "<group>"; };
 		5A3D450E251DE2E7002F3761 /* ComponentManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ComponentManager.cpp; sourceTree = "<group>"; };
 		5A3D450F251DE2E7002F3761 /* ComponentManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ComponentManager.hpp; sourceTree = "<group>"; };
 		5A3D4512251DE7E1002F3761 /* TransformComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TransformComponent.hpp; sourceTree = "<group>"; };
+		5A466E1B25212CD200207A6F /* SpriteSheetManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SpriteSheetManager.cpp; sourceTree = "<group>"; };
+		5A466E1C25212CD200207A6F /* SpriteSheetManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SpriteSheetManager.hpp; sourceTree = "<group>"; };
 		5A6CB52C251FE3C1001F11E5 /* Entity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
 		5A6CB52D251FE3C1001F11E5 /* Entity.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Entity.hpp; sourceTree = "<group>"; };
 		5A6CB533251FF2B9001F11E5 /* Character_Attack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Character_Attack.png; path = "/Volumes/Samsung_T5/Developer/Xcode-Workspace/ShortEngine/ShortEngine/Assets/Character_Attack.png"; sourceTree = "<absolute>"; };
@@ -86,6 +93,7 @@
 				5A1C06A1251F7169009867C1 /* SpriteComponent.hpp */,
 				5A1C06B0251F8203009867C1 /* AnimateComponent.hpp */,
 				5A1C06B3251F8436009867C1 /* Components.hpp */,
+				5A2BA51F2520D0E200D7CEAC /* PlayerControlComponent.hpp */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -118,6 +126,10 @@
 				5A9F94D7251CFF41005EC77B /* ECS */,
 				5A1C06A2251F7517009867C1 /* AssetManager.cpp */,
 				5A1C06A3251F7517009867C1 /* AssetManager.hpp */,
+				5A2BA5242520E15500D7CEAC /* SpriteSheet.cpp */,
+				5A2BA5252520E15500D7CEAC /* SpriteSheet.hpp */,
+				5A466E1B25212CD200207A6F /* SpriteSheetManager.cpp */,
+				5A466E1C25212CD200207A6F /* SpriteSheetManager.hpp */,
 			);
 			path = ShortEngine;
 			sourceTree = "<group>";
@@ -204,10 +216,12 @@
 			files = (
 				5A7F54AC251CE4DA00A55B3E /* main.cpp in Sources */,
 				5A1C06A4251F7517009867C1 /* AssetManager.cpp in Sources */,
+				5A466E1D25212CD200207A6F /* SpriteSheetManager.cpp in Sources */,
 				5A9F94DA251CFF56005EC77B /* EntityManager.cpp in Sources */,
 				5A7F54B7251CE76800A55B3E /* Game.cpp in Sources */,
 				5A6CB52E251FE3C1001F11E5 /* Entity.cpp in Sources */,
 				5A3D4510251DE2E7002F3761 /* ComponentManager.cpp in Sources */,
+				5A2BA5262520E15500D7CEAC /* SpriteSheet.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

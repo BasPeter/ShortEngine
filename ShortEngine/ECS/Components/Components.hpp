@@ -12,5 +12,6 @@
 #include "TransformComponent.hpp"
 #include "SpriteComponent.hpp"
 #include "AnimateComponent.hpp"
+#include "PlayerControlComponent.hpp"
 
 #endif /* Components_hpp */

@@ -18,6 +18,7 @@
 #include "Game.hpp"
 #include "EntityManager.hpp"
 #include "Components.hpp"
+#include "SpriteSheet.hpp"
 
 // Forward declaration Entity
 struct Entity;

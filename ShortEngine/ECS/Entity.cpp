@@ -10,15 +10,15 @@
 
 Entity::Entity(unsigned int id): _id(id)
 {
-    std::cout << "Entity Constructor Called" << std::endl;
+//    std::cout << "Entity Constructor Called" << std::endl;
 }
 
 Entity::~Entity()
 {
-    std::cout << "Entity Destructor Called" << std::endl;
+//    std::cout << "Entity Destructor Called" << std::endl;
 }
 
 Entity::Entity(Entity const& source): _id(source._id)
 {
-    std::cout << "Entity Copy Constructor Called" << std::endl;
+//    std::cout << "Entity Copy Constructor Called" << std::endl;
 }
