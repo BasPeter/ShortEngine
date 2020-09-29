@@ -13,5 +13,6 @@
 #include "SpriteComponent.hpp"
 #include "AnimateComponent.hpp"
 #include "PlayerControlComponent.hpp"
+#include "PhysicsComponent.hpp"
 
 #endif /* Components_hpp */

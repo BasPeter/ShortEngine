@@ -18,6 +18,8 @@
 		5A7F54AC251CE4DA00A55B3E /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A7F54AB251CE4DA00A55B3E /* main.cpp */; };
 		5A7F54B4251CE75600A55B3E /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A7F54B3251CE75600A55B3E /* SDL2.framework */; };
 		5A7F54B7251CE76800A55B3E /* Game.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A7F54B5251CE76800A55B3E /* Game.cpp */; };
+		5A88152D25236B47001A120F /* PVector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A88152B25236B47001A120F /* PVector.cpp */; };
+		5A88153025237BBF001A120F /* TimeStep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A88152E25237BBF001A120F /* TimeStep.cpp */; };
 		5A9F94DA251CFF56005EC77B /* EntityManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A9F94D8251CFF56005EC77B /* EntityManager.cpp */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +62,11 @@
 		5A7F54B5251CE76800A55B3E /* Game.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Game.cpp; sourceTree = "<group>"; };
 		5A7F54B6251CE76800A55B3E /* Game.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Game.hpp; sourceTree = "<group>"; };
 		5A7F54B8251CECF100A55B3E /* ShortEngine.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ShortEngine.entitlements; sourceTree = "<group>"; };
+		5A8815282523687D001A120F /* PhysicsComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PhysicsComponent.hpp; sourceTree = "<group>"; };
+		5A88152B25236B47001A120F /* PVector.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PVector.cpp; sourceTree = "<group>"; };
+		5A88152C25236B47001A120F /* PVector.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PVector.hpp; sourceTree = "<group>"; };
+		5A88152E25237BBF001A120F /* TimeStep.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TimeStep.cpp; sourceTree = "<group>"; };
+		5A88152F25237BBF001A120F /* TimeStep.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TimeStep.hpp; sourceTree = "<group>"; };
 		5A9F94D8251CFF56005EC77B /* EntityManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EntityManager.cpp; sourceTree = "<group>"; };
 		5A9F94D9251CFF56005EC77B /* EntityManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EntityManager.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -94,6 +101,7 @@
 				5A1C06B0251F8203009867C1 /* AnimateComponent.hpp */,
 				5A1C06B3251F8436009867C1 /* Components.hpp */,
 				5A2BA51F2520D0E200D7CEAC /* PlayerControlComponent.hpp */,
+				5A8815282523687D001A120F /* PhysicsComponent.hpp */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -123,6 +131,8 @@
 				5A7F54AB251CE4DA00A55B3E /* main.cpp */,
 				5A7F54B5251CE76800A55B3E /* Game.cpp */,
 				5A7F54B6251CE76800A55B3E /* Game.hpp */,
+				5A88152E25237BBF001A120F /* TimeStep.cpp */,
+				5A88152F25237BBF001A120F /* TimeStep.hpp */,
 				5A9F94D7251CFF41005EC77B /* ECS */,
 				5A1C06A2251F7517009867C1 /* AssetManager.cpp */,
 				5A1C06A3251F7517009867C1 /* AssetManager.hpp */,
@@ -130,6 +140,7 @@
 				5A2BA5252520E15500D7CEAC /* SpriteSheet.hpp */,
 				5A466E1B25212CD200207A6F /* SpriteSheetManager.cpp */,
 				5A466E1C25212CD200207A6F /* SpriteSheetManager.hpp */,
+				5A88152A25236B2F001A120F /* Physics */,
 			);
 			path = ShortEngine;
 			sourceTree = "<group>";
@@ -141,6 +152,15 @@
 				5A7F54B3251CE75600A55B3E /* SDL2.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		5A88152A25236B2F001A120F /* Physics */ = {
+			isa = PBXGroup;
+			children = (
+				5A88152B25236B47001A120F /* PVector.cpp */,
+				5A88152C25236B47001A120F /* PVector.hpp */,
+			);
+			path = Physics;
 			sourceTree = "<group>";
 		};
 		5A9F94D7251CFF41005EC77B /* ECS */ = {
@@ -215,12 +235,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A7F54AC251CE4DA00A55B3E /* main.cpp in Sources */,
+				5A88152D25236B47001A120F /* PVector.cpp in Sources */,
 				5A1C06A4251F7517009867C1 /* AssetManager.cpp in Sources */,
 				5A466E1D25212CD200207A6F /* SpriteSheetManager.cpp in Sources */,
 				5A9F94DA251CFF56005EC77B /* EntityManager.cpp in Sources */,
 				5A7F54B7251CE76800A55B3E /* Game.cpp in Sources */,
 				5A6CB52E251FE3C1001F11E5 /* Entity.cpp in Sources */,
 				5A3D4510251DE2E7002F3761 /* ComponentManager.cpp in Sources */,
+				5A88153025237BBF001A120F /* TimeStep.cpp in Sources */,
 				5A2BA5262520E15500D7CEAC /* SpriteSheet.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

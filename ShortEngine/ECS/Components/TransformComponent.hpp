@@ -11,16 +11,17 @@
 
 #include <iostream>
 
+#include "PVector.hpp"
+
 struct TransformComponent
 {
-    float position[2];
+    PVector position;
     float scale[2];
     float rotation;
     
-    TransformComponent(float x, float y, float w, float h, float r)
+    TransformComponent(float x, float y, float w, float h, float r): position(PVector{x, y})
     {
-        position[0] = x;
-        position[1] = y;
+//        position = PVector{x, y};
         scale[0] = w;
         scale[1] = h;
         rotation = r;

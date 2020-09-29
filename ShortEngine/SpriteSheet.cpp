@@ -8,8 +8,9 @@
 
 #include "SpriteSheet.hpp"
 
+
 SpriteSheet::SpriteSheet(SDL_Texture* texture, int frames, int sheet_width, int sheet_height, int columns, int rows)
-{
+{    
     this->texture = texture;
         
     sheet_size[0] = sheet_width;

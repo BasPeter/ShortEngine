@@ -13,6 +13,7 @@ SDL_Event *Game::Events;
 EntityManager *Game::Registry = nullptr;
 AssetManager *Game::Assets = nullptr;
 SpriteSheetManager *Game::SpriteSheets = nullptr;
+TimeStep *Game::TimeStep = nullptr;
 
 Game::Game()
 {
@@ -68,15 +69,19 @@ void Game::init(const std::string title, int width, int height, bool fullscreen)
     
     Entity* E1 = Registry->Create();
     
-    Registry->Emplace<TransformComponent>(E1, 0.0f, 0.0f, 4.0f, 4.0f, 0.0f);
+    Registry->Emplace<TransformComponent>(E1, 250.0f, 25.0f, 2.0f, 2.0f, 0.0f);
     Registry->Emplace<SpriteComponent>(E1, SpriteSheets->GetSpriteSheets("walk")[0]);
     Registry->Emplace<AnimateComponent>(E1, 0, 12, true);
+    Registry->Emplace<PhysicsComponent>(E1, 2.5f);
     
-    Entity* E2 = Registry->Create();
+//    Entity* E2 = Registry->Create();
+//
+//    Registry->Emplace<TransformComponent>(E2, 0.0f, 200.0f, 4.0f, 4.0f, 0.0f);
+//    Registry->Emplace<SpriteComponent>(E2, SpriteSheets->GetSpriteSheets("attack")[0]);
+//    Registry->Emplace<AnimateComponent>(E2, 0, 12, true);
     
-    Registry->Emplace<TransformComponent>(E2, 0.0f, 200.0f, 4.0f, 4.0f, 0.0f);
-    Registry->Emplace<SpriteComponent>(E2, SpriteSheets->GetSpriteSheets("attack")[0]);
-    Registry->Emplace<AnimateComponent>(E2, 0, 12, true);
+    // Init Timestep
+    TimeStep = TimeStep::Create();
     
     _running = true;
 }
@@ -105,10 +110,10 @@ void Game::Render()
 
 void Game::Update()
 {
-    auto manager = dynamic_cast<ComponentManager<SpriteComponent>*>(Registry->GetComponentManager<SpriteComponent>());
-    auto group = manager->Group<AnimateComponent>();
+    auto sprite_manager = dynamic_cast<ComponentManager<SpriteComponent>*>(Registry->GetComponentManager<SpriteComponent>());
+    auto sprite_animate_group = sprite_manager->Group<AnimateComponent>();
     
-    for (auto& [sprite, animate] : group)
+    for (auto& [sprite, animate] : sprite_animate_group)
     {
         if (animate->animate && SDL_GetTicks() - animate->last_frame > animate->speed)
         {
@@ -119,7 +124,16 @@ void Game::Update()
             animate->last_frame = SDL_GetTicks();
         };
     }
-}
+    
+    auto physics_manager = dynamic_cast<ComponentManager<PhysicsComponent>*>(Registry->GetComponentManager<PhysicsComponent>());
+    auto physics_transform_group = physics_manager->Group<TransformComponent>();
+
+    for (auto& [physics, transform] : physics_transform_group)
+        {
+            physics->applyForce(PVector(0, 4));
+            physics->simulate(transform, TimeStep->get());
+        }
+    }
 
 void Game::Clean()
 {

@@ -18,6 +18,7 @@ ComponentManager<T>::ComponentManager()
 template ComponentManager<TransformComponent>::ComponentManager();
 template ComponentManager<SpriteComponent>::ComponentManager();
 template ComponentManager<AnimateComponent>::ComponentManager();
+template ComponentManager<PhysicsComponent>::ComponentManager();
 
 template <typename T>
 ComponentManager<T>::~ComponentManager()
@@ -29,7 +30,7 @@ ComponentManager<T>::~ComponentManager()
 template ComponentManager<TransformComponent>::~ComponentManager();
 template ComponentManager<SpriteComponent>::~ComponentManager();
 template ComponentManager<AnimateComponent>::~ComponentManager();
-
+template ComponentManager<PhysicsComponent>::~ComponentManager();
 
 template <typename T>
 template <typename... Args>
@@ -53,6 +54,7 @@ void ComponentManager<T>::Remove(Entity* entity) {
 template void ComponentManager<TransformComponent>::Emplace(Entity* entity, float x, float y, float w, float h, float r);
 template void ComponentManager<SpriteComponent>::Emplace(Entity* entity, SpriteSheet*);
 template void ComponentManager<AnimateComponent>::Emplace(Entity* entity, int, int, bool);
+template void ComponentManager<PhysicsComponent>::Emplace(Entity* entity, float);
 
 
 template <typename T>
@@ -91,3 +93,5 @@ std::vector<std::pair<T*, G*>> ComponentManager<T>::Group()
 // Explicit instatiation
 template std::vector<std::pair<SpriteComponent*, TransformComponent*>> ComponentManager<SpriteComponent>::Group<TransformComponent>();
 template std::vector<std::pair<SpriteComponent*, AnimateComponent*>> ComponentManager<SpriteComponent>::Group<AnimateComponent>();
+template std::vector<std::pair<PhysicsComponent*, TransformComponent*>> ComponentManager<PhysicsComponent>::Group<TransformComponent>();
+

@@ -49,6 +49,7 @@ void EntityManager::Emplace(Entity* entity, Args... args)
 template void EntityManager::Emplace<TransformComponent>(Entity* entity, float x, float y, float w, float h, float r);
 template void EntityManager::Emplace<SpriteComponent>(Entity* entity, SpriteSheet*);
 template void EntityManager::Emplace<AnimateComponent>(Entity* entity, int, int, bool);
+template void EntityManager::Emplace<PhysicsComponent>(Entity* entity, float);
 
 
 template <typename T>
@@ -68,3 +69,5 @@ ComponentManagerInstance* EntityManager::GetComponentManager()
 template ComponentManagerInstance* EntityManager::GetComponentManager<TransformComponent>();
 template ComponentManagerInstance* EntityManager::GetComponentManager<SpriteComponent>();
 template ComponentManagerInstance* EntityManager::GetComponentManager<AnimateComponent>();
+template ComponentManagerInstance* EntityManager::GetComponentManager<PhysicsComponent>();
+

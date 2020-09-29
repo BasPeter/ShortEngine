@@ -22,7 +22,6 @@ class SpriteSheet;
 class SpriteSheetManager
 {
 public:
-    SpriteSheetManager(){};
     
     static SpriteSheetManager* Create();
     static void DeleteSpriteSheet();

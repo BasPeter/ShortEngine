@@ -17,6 +17,7 @@
 class SpriteSheet
 {
 public:
+    
     SDL_Texture* texture;
     int sheet_size[2];
         
@@ -32,3 +33,4 @@ private:
 };
 
 #endif /* SpriteSheet_hpp */
+  

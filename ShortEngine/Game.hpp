@@ -19,6 +19,7 @@
 #include "EntityManager.hpp"
 #include "AssetManager.hpp"
 #include "SpriteSheetManager.hpp"
+#include "TimeStep.hpp"
 #include "Components.hpp"
 
 class AssetManager;
@@ -47,6 +48,7 @@ public:
     static EntityManager *Registry;
     static AssetManager *Assets;
     static SpriteSheetManager *SpriteSheets;
+    static TimeStep *TimeStep;
     
 private:
     bool _running;

@@ -36,7 +36,7 @@ public:
         std::cout << "Sprite Component Destructor Called" << std::endl;
     }
     
-    void Draw(SDL_Renderer* renderer, float position[2], float scale[2])
+    void Draw(SDL_Renderer* renderer, PVector& position, float scale[2])
     {
         SDL_Rect source = sprite_sheet->GetFrame(current_frame);
         SDL_Rect destination = GetDestinationRect(source, position, scale);
@@ -44,10 +44,10 @@ public:
     }
     
 private:
-    SDL_Rect GetDestinationRect(SDL_Rect& rect, float position[2], float scale[2]) {
+    SDL_Rect GetDestinationRect(SDL_Rect& rect, PVector& position, float scale[2]) {
 
         //Transform source rect using given position and scale
-        SDL_Rect result{(int)position[0], (int)position[1], rect.w, rect.h};
+        SDL_Rect result{(int)position.GetX(), (int)position.GetY(), rect.w, rect.h};
         result.w *= scale[0];
         result.h *= scale[1];
         return result;

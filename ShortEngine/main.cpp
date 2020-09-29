@@ -15,7 +15,7 @@ constexpr int kMsPerFrame{1000/kFramesPerSecond};
 int main(int argc, const char * argv[]) {
 
     Game game;
-    game.init("Test", 600, 480, false);
+    game.init("Test", 1200, 800, false);
     
     unsigned lastWindowTitleUpdate{0};
     int count{0};
@@ -45,6 +45,8 @@ int main(int argc, const char * argv[]) {
             lastWindowTitleUpdate = frameEnd;
         }
         count++;
+        
+        game.TimeStep->Reset();
     };
     
     game.Clean();
