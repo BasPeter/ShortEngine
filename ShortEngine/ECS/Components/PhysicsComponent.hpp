@@ -29,7 +29,7 @@ public:
             // F / m = a
             force /= _mass;
             
-            // Add acceleration to existing acceleration
+            // Add force to existing acceleration
             _acceleration += force;
         }
     }
@@ -40,10 +40,10 @@ public:
         _velocity += _acceleration;
         
         // Apply timestep
-        _acceleration *= (timestep/10);
+        _acceleration *= (timestep/100.0f);
         
         // Add velocity to location
-        transform->position += _acceleration;
+        transform->position += _velocity;
         
         // Reset simulation
         _acceleration *= 0.0f;

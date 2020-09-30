@@ -39,10 +39,13 @@ public:
     void Remove(Entity* entity);
     
     T* GetComponent(unsigned id);
-    std::vector<T>& GetView() { return _components; };
+    std::vector<T*> GetView() { return _components; };
     
     template <typename G>
     std::vector<std::pair<T*, G*>> Group();
+    
+    template <typename G, typename H>
+    std::vector<std::tuple<T*, G*, H*>> Group();
     
 private:
     std::unordered_map<unsigned, unsigned> _map;

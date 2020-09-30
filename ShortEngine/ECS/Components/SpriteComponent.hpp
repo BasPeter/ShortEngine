@@ -27,7 +27,7 @@ public:
     SpriteSheet* sprite_sheet;
     int current_frame{0};
     
-    SpriteComponent(SpriteSheet* sprite_sheet): sprite_sheet(sprite_sheet)
+    SpriteComponent(SpriteSheet* sprite_sheet, int current_frame): sprite_sheet(sprite_sheet), current_frame(current_frame)
     {
     }
     

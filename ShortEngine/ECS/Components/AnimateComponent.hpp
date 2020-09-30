@@ -21,8 +21,10 @@ struct AnimateComponent
     
     AnimateComponent(int c_f, int fps, bool a)
     {
-        speed = 1000/fps;
-        animate = a;
+        if (fps != 0) {
+            speed = 1000/fps;
+            animate = a;
+        }
     }
     
     AnimateComponent(AnimateComponent const& source) = default;

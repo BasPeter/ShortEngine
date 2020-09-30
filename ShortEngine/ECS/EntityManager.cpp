@@ -47,9 +47,10 @@ void EntityManager::Emplace(Entity* entity, Args... args)
 
 // Explicit instatiation
 template void EntityManager::Emplace<TransformComponent>(Entity* entity, float x, float y, float w, float h, float r);
-template void EntityManager::Emplace<SpriteComponent>(Entity* entity, SpriteSheet*);
+template void EntityManager::Emplace<SpriteComponent>(Entity* entity, SpriteSheet*, int);
 template void EntityManager::Emplace<AnimateComponent>(Entity* entity, int, int, bool);
 template void EntityManager::Emplace<PhysicsComponent>(Entity* entity, float);
+template void EntityManager::Emplace<CollisionComponent>(Entity* entity, float, float, float, float, bool);
 
 
 template <typename T>

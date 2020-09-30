@@ -14,5 +14,6 @@
 #include "AnimateComponent.hpp"
 #include "PlayerControlComponent.hpp"
 #include "PhysicsComponent.hpp"
+#include "CollisionComponent.hpp"
 
 #endif /* Components_hpp */

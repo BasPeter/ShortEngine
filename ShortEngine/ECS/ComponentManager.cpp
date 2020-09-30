@@ -19,6 +19,7 @@ template ComponentManager<TransformComponent>::ComponentManager();
 template ComponentManager<SpriteComponent>::ComponentManager();
 template ComponentManager<AnimateComponent>::ComponentManager();
 template ComponentManager<PhysicsComponent>::ComponentManager();
+template ComponentManager<CollisionComponent>::ComponentManager();
 
 template <typename T>
 ComponentManager<T>::~ComponentManager()
@@ -31,6 +32,7 @@ template ComponentManager<TransformComponent>::~ComponentManager();
 template ComponentManager<SpriteComponent>::~ComponentManager();
 template ComponentManager<AnimateComponent>::~ComponentManager();
 template ComponentManager<PhysicsComponent>::~ComponentManager();
+template ComponentManager<CollisionComponent>::~ComponentManager();
 
 template <typename T>
 template <typename... Args>
@@ -52,9 +54,10 @@ void ComponentManager<T>::Remove(Entity* entity) {
 
 // Explicit instatiation
 template void ComponentManager<TransformComponent>::Emplace(Entity* entity, float x, float y, float w, float h, float r);
-template void ComponentManager<SpriteComponent>::Emplace(Entity* entity, SpriteSheet*);
+template void ComponentManager<SpriteComponent>::Emplace(Entity* entity, SpriteSheet*, int);
 template void ComponentManager<AnimateComponent>::Emplace(Entity* entity, int, int, bool);
 template void ComponentManager<PhysicsComponent>::Emplace(Entity* entity, float);
+template void ComponentManager<CollisionComponent>::Emplace(Entity* entity, float, float, float, float, bool);
 
 
 template <typename T>
@@ -94,4 +97,35 @@ std::vector<std::pair<T*, G*>> ComponentManager<T>::Group()
 template std::vector<std::pair<SpriteComponent*, TransformComponent*>> ComponentManager<SpriteComponent>::Group<TransformComponent>();
 template std::vector<std::pair<SpriteComponent*, AnimateComponent*>> ComponentManager<SpriteComponent>::Group<AnimateComponent>();
 template std::vector<std::pair<PhysicsComponent*, TransformComponent*>> ComponentManager<PhysicsComponent>::Group<TransformComponent>();
+
+template <typename T>
+template <typename G, typename H>
+std::vector<std::tuple<T*, G*, H*>> ComponentManager<T>::Group()
+{
+    std::vector<std::tuple<T*, G*, H*>> grouped_components;
+    
+    ComponentManager<G>* secondManager = dynamic_cast<ComponentManager<G>*>(Game::Registry->GetComponentManager<G>());
+    ComponentManager<H>* thirdManager = dynamic_cast<ComponentManager<H>*>(Game::Registry->GetComponentManager<H>());
+    G* secondComponent = nullptr;
+    H* thirdComponent = nullptr;
+    for (auto& [key, value] : _map)
+    {
+        secondComponent = secondManager->GetComponent(key);
+        if (secondComponent != nullptr)
+        {
+            thirdComponent = thirdManager->GetComponent(key);
+            if (thirdComponent != nullptr)
+            {
+                T* firstComponent = _components[key];
+                std::tuple<T*,G*, H*> tuple = std::make_tuple(firstComponent, secondComponent, thirdComponent);
+                grouped_components.push_back(std::move(tuple));
+            }
+        }
+    }
+    
+    return grouped_components;
+}
+
+// Explicit instatiation
+template std::vector<std::tuple<CollisionComponent*, PhysicsComponent*, TransformComponent*>> ComponentManager<CollisionComponent>::Group<PhysicsComponent, TransformComponent>();
 

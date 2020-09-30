@@ -14,6 +14,7 @@
 #include <SDL2_image/SDL_image.h>
 #include <string>
 #include <iostream>
+#include <vector>
 
 #include "ComponentManager.hpp"
 #include "EntityManager.hpp"
