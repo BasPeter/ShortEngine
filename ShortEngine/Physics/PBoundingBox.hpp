@@ -21,10 +21,12 @@ class PBoundingBox
 public:
     PBoundingBox(int x, int y, int w, int h);
     
-    std::vector<PVector> doesCollide();
-    PVector getContraintFunction();
+    std::vector<PVector> getContraintFunction();
     
-    void UpdatePosition(PVector position);
+    void UpdatePosition(PVector& position);
+    void Move(PVector&& change);
+    void Move(float x, float y);
+
     SDL_Rect* GetBoundingBox() { return &_bounding_box; };
     
     static void sort_bounding_boxes();

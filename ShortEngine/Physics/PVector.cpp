@@ -48,3 +48,27 @@ PVector& PVector::operator*=(const float&& n)
     return *this;
 }
 
+PVector PVector::operator+(const PVector& n)
+{
+    PVector newVector{
+    this->_x + n.GetX(),
+    this->_y + n.GetY()
+    };
+    return newVector;
+}
+
+PVector& PVector::operator*(const float& n)
+{
+    this->_x *= n;
+    this->_y *= n;
+    return *this;
+}
+
+PVector PVector::operator/(const float& n)
+{
+    PVector newVector{
+    this->_x / n,
+    this->_y / n
+    };
+    return newVector;
+}

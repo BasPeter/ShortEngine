@@ -21,7 +21,6 @@ struct TransformComponent
     
     TransformComponent(float x, float y, float w, float h, float r): position(PVector{x, y})
     {
-//        position = PVector{x, y};
         scale[0] = w;
         scale[1] = h;
         rotation = r;

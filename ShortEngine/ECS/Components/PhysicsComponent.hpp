@@ -39,16 +39,19 @@ public:
         // Add acceleration to velocity
         _velocity += _acceleration;
         
-        // Apply timestep
-        _acceleration *= (timestep/100.0f);
-        
-        // Add velocity to location
-        transform->position += _velocity;
+        // Add velocity to location, corrected for timestep
+        if(timestep > 0)
+        {
+            transform->position += (_velocity / (timestep/10.0f));
+        }
         
         // Reset simulation
         _acceleration *= 0.0f;
-        
     }
+    
+    const float& GetMass() { return _mass; };
+    const PVector& GetVelocity() { return _velocity; };
+    const PVector& GetAcceleration() { return _acceleration; };
     
     
 private:

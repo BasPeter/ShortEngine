@@ -55,6 +55,7 @@ void Game::init(const std::string title, int width, int height, bool fullscreen)
     Assets = AssetManager::Create();
     SpriteSheets = SpriteSheetManager::Create();
     
+    SpriteSheets->RegisterSpriteSheet("idle", "character_idle", "Assets/Character_Idle.png", 4, 137, 176, 4, 1);
     SpriteSheets->RegisterSpriteSheet("walk", "character_walk", "Assets/Character_Run.png", 6, 137, 264, 6, 1);
     SpriteSheets->RegisterSpriteSheet("attack", "character_attack", "Assets/Character_Attack.png", 13, 137, 572, 13, 1);
     SpriteSheets->RegisterSpriteSheet("moss", "mossy_tiles", "Assets/Mossy_Tiles.png", 4, 2048, 2048, 4, 1);
@@ -74,15 +75,23 @@ void Game::init(const std::string title, int width, int height, bool fullscreen)
     Registry->Emplace<SpriteComponent>(E1, SpriteSheets->GetSpriteSheets("walk")[0], 0);
     Registry->Emplace<AnimateComponent>(E1, 0, 12, true);
     Registry->Emplace<PhysicsComponent>(E1, 2.0f);
-    Registry->Emplace<CollisionComponent>(E1, 10.0f, 35.0f, 44.0f, 40.0f, true);
+    Registry->Emplace<CollisionComponent>(E1, 18.0f, 41.0f, 32.0f, 34.0f, false);
+    
+    Entity* E1B = Registry->Create();
+    
+    Registry->Emplace<TransformComponent>(E1B, 100.0f, 0.0f, 2.0f, 2.0f, 0.0f);
+    Registry->Emplace<SpriteComponent>(E1B, SpriteSheets->GetSpriteSheets("attack")[0], 0);
+    Registry->Emplace<AnimateComponent>(E1B, 0, 12, true);
+    Registry->Emplace<PhysicsComponent>(E1B, 2.0f);
+    Registry->Emplace<CollisionComponent>(E1B, 18.0f, 41.0f, 32.0f, 34.0f, false);
     
     Entity* E2 = Registry->Create();
 
     Registry->Emplace<TransformComponent>(E2, 75.0f, 250.0f, 4.0f, 4.0f, 0.0f);
-    Registry->Emplace<SpriteComponent>(E2, SpriteSheets->GetSpriteSheets("attack")[0], 0);
+    Registry->Emplace<SpriteComponent>(E2, SpriteSheets->GetSpriteSheets("idle")[0], 0);
     Registry->Emplace<AnimateComponent>(E2, 0, 12, true);
     Registry->Emplace<PhysicsComponent>(E2, 5.0f);
-    Registry->Emplace<CollisionComponent>(E2, 20.0f, 70.0f, 44.0f * 2, 40.0f * 2, true);
+    Registry->Emplace<CollisionComponent>(E2, 32.0f, 82.0f, 32.0f * 2, 34.0f * 2, false);
     
     
     Entity* E3 = Registry->Create();
@@ -151,7 +160,7 @@ void Game::Update()
 
     for (auto& [physics, transform] : physics_transform_group)
     {
-        physics->applyForce(PVector(0, 1.0f));
+        physics->applyForce(PVector(0, 0.5f * physics->GetMass()));
     }
     
     auto collision_manager = dynamic_cast<ComponentManager<CollisionComponent>*>(Registry->GetComponentManager<CollisionComponent>());
@@ -161,15 +170,8 @@ void Game::Update()
     {
         collision->bounding_box.UpdatePosition(transform->position);
         
-        // if collision component
-        // resolve collision
-        // update velocity
-        
-        std::vector<PVector> impulses = collision->bounding_box.doesCollide();
-        for (PVector impulse : impulses)
-        {
-            physics->applyForce(impulse);
-        }
+        PVector constraint_impulse = collision->resolve(physics->GetVelocity(), physics->GetAcceleration(), physics->GetMass(), TimeStep->get());
+        physics->applyForce(constraint_impulse);
     }
     
     for (auto& [physics, transform] : physics_transform_group)

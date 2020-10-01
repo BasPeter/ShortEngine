@@ -11,8 +11,12 @@
 
 #include <stdio.h>
 #include <SDL2/SDL.h>
+#include <vector>
 
 #include "PBoundingBox.hpp"
+#include "PVector.hpp"
+
+#define MAX_ITERATIONS 15
 
 class CollisionComponent
 {
@@ -20,26 +24,44 @@ public:
     
     CollisionComponent(int x, int y, int w, int h, bool show_bounding_box): bounding_box(x, y, w, h), _show_bounding_box(show_bounding_box)
     {
-//        _components.emplace_back(*this);
     }
     
-    void resolve()
+    PVector resolve(const PVector& velocity, const PVector& acceleration, const float& mass, Uint32& timestep)
     {
-        /*
-        1. Integrate applied forces using semi-implicit Euler as in Part I, yielding tentative velocities. These velocities may violate the constraints and need to be corrected before being applied.
+        
+        // 1. Integrate applied forces using semi-implicit Euler as in Part I, yielding tentative velocities. These velocities may violate the constraints and need to be corrected before being applied.
+        bounding_box.Move(velocity.GetX() + acceleration.GetX(), velocity.GetY() + acceleration.GetY());
 
-        2. Apply impulses sequentially for all constraints, to correct the velocity errors. Repeat for several iterations, until impulses become small or after a maximum number of iterations is reached.
+        PVector constraint_impulse{0,0};
+        PVector constraint_impulse_step{0,0};
+        std::vector<PVector> constraint_functions = bounding_box.getContraintFunction();
+        int iteration = 0;
+        
+        
+        // 2. Apply impulses sequentially for all constraints, to correct the velocity errors. Repeat for several iterations, until impulses become small or after a maximum number of iterations is reached.
+        while (constraint_functions.size() > 0 && iteration < MAX_ITERATIONS)
+        {
+            
+            for (PVector constraint : constraint_functions)
+            {
+                constraint_impulse_step += (constraint);
+            }
 
-        3. Use the new velocities to simulate motion, updating positions, again using semi-implicit Euler.
-        */
+            // calculate correction on location
+            PVector correction{
+                (constraint_impulse_step.GetX() / mass),
+                (constraint_impulse_step.GetY() / mass)
+            };
+
+            // 3. Use the new velocities to simulate motion, updating positions, again using semi-implicit Euler.
+            bounding_box.Move(std::move((correction) / (timestep/10.0f)));
+            
+            constraint_impulse += constraint_impulse_step;
+            constraint_functions = bounding_box.getContraintFunction();
+            iteration++;
+        }
         
-//        std::vector<PVector> impulses = bounding_box.doesCollide();
-//        for (PVector impulse : impulses)
-//        {
-//            physics->applyForce(impulse);
-//        }
-        
-        
+        return constraint_impulse;
     }
     
     void draw(SDL_Renderer* renderer)

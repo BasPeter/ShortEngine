@@ -24,6 +24,10 @@ public:
     PVector& operator*=(const float&);
     PVector& operator*=(const float&&);
     
+    PVector operator+(const PVector&);
+    PVector& operator*(const float&);
+    PVector operator/(const float&);
+    
     float GetX() const { return _x; };
     float GetY() const { return _y; };
     

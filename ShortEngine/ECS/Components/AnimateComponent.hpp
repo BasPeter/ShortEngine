@@ -14,7 +14,6 @@
 
 struct AnimateComponent
 {
-//    unsigned int current_frame{0};
     unsigned int speed{0};
     Uint32 last_frame{0};
     bool animate{false};

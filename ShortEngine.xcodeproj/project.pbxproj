@@ -23,6 +23,7 @@
 		5A88152D25236B47001A120F /* PVector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A88152B25236B47001A120F /* PVector.cpp */; };
 		5A88153025237BBF001A120F /* TimeStep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A88152E25237BBF001A120F /* TimeStep.cpp */; };
 		5A9F94DA251CFF56005EC77B /* EntityManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5A9F94D8251CFF56005EC77B /* EntityManager.cpp */; };
+		5AD9A6972526082C00431F5D /* Character_Idle.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5AD9A696252607DF00431F5D /* Character_Idle.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -32,6 +33,7 @@
 			dstPath = Assets;
 			dstSubfolderSpec = 16;
 			files = (
+				5AD9A6972526082C00431F5D /* Character_Idle.png in CopyFiles */,
 				5A5000EE2524C5D4009D1AD4 /* Mossy_Tiles.png in CopyFiles */,
 				5A6CB534251FF2CD001F11E5 /* Character_Attack.png in CopyFiles */,
 				5A1C06AE251F7998009867C1 /* Character_Run.png in CopyFiles */,
@@ -75,6 +77,7 @@
 		5A88152F25237BBF001A120F /* TimeStep.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TimeStep.hpp; sourceTree = "<group>"; };
 		5A9F94D8251CFF56005EC77B /* EntityManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EntityManager.cpp; sourceTree = "<group>"; };
 		5A9F94D9251CFF56005EC77B /* EntityManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EntityManager.hpp; sourceTree = "<group>"; };
+		5AD9A696252607DF00431F5D /* Character_Idle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Character_Idle.png; sourceTree = "<group>"; };
 		5AF0A1802523BDA900297E65 /* CollisionComponent.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CollisionComponent.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -94,6 +97,7 @@
 		5A1C06AC251F796A009867C1 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				5AD9A696252607DF00431F5D /* Character_Idle.png */,
 				5A5000ED2524C5C3009D1AD4 /* Mossy_Tiles.png */,
 				5A6CB533251FF2B9001F11E5 /* Character_Attack.png */,
 				5A1C06AD251F7986009867C1 /* Character_Run.png */,
